@@ -1,7 +1,10 @@
 package com.example.cis183_multipleintents30;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     //String[] test = {"Hello","Hi","Hola"};
     ListView lv_j_listOfPets;
     PetListAdapter plAdapter;
+
+    Intent intent_j_displayUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +70,16 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("Pet Dat:", pet.getName() + " is a " + pet.getType() + " and is " + pet.getAge() + " years old");
 
 
+
+        //get an instance of PetDisplayUpdate
+        intent_j_displayUpdate = new Intent(MainActivity.this, PetDisplayUpdate.class);
+
+
         addDummyDataToArrayList();
         displayAllPetData();
 
         fillListView();
+        setOnClickListenerForListView();
     }
 
 
@@ -101,5 +112,24 @@ public class MainActivity extends AppCompatActivity {
         plAdapter = new PetListAdapter(this, listOfPets);
 
         lv_j_listOfPets.setAdapter(plAdapter);
+    }
+
+    private void setOnClickListenerForListView()
+    {
+        lv_j_listOfPets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Pet petSelected = listOfPets.get(position);
+                goToPetDisplayUpdate(petSelected);
+                //testing
+                //Log.d("Pet Selected: ", petSelected.getName());
+            }
+        });
+    }
+
+    public void goToPetDisplayUpdate(Pet pet)
+    {
+        intent_j_displayUpdate.putExtra("PetData", pet);
+        startActivity(intent_j_displayUpdate);
     }
 }
