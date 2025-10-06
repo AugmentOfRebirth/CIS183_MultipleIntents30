@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     static private ArrayList<Pet> listOfPets;
+    static int numberTestingLoad = 50;
+    static boolean firstLoad = true;
+    //boolean firstLoad = true;
 
     //this is going to be used for testing purposes only
     //just to show how listviews interact well with arrays
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     PetListAdapter plAdapter;
 
     Intent intent_j_displayUpdate;
+
+    Button btn_j_addPet;
+    Intent intent_j_addNewPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,38 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Intent cameFrom = getIntent();
+
+        if(cameFrom.getSerializableExtra("PetData") != null)
+        {
+            Pet petData = (Pet) cameFrom.getSerializableExtra("PetData");
+            listOfPets.add(petData);
+        }
+
+
+        if(firstLoad)
+        {
+            listOfPets = new ArrayList<>();
+            Pet pet = new Pet();
+            pet.setName("Tito");
+            pet.setAge(12);
+            pet.setType("Dog");
+
+
+            listOfPets.add(pet);
+
+            Pet anotherpet = new Pet("Willow", 5, "Dog");
+
+
+            listOfPets.add(anotherpet);
+            //Log.d("Pet Dat:", pet.getName() + " is a " + pet.getType() + " and is " + pet.getAge() + " years old");
+
+
+            addDummyDataToArrayList();
+
+            firstLoad = false;
+        }
+
 
         //gUI connection
         lv_j_listOfPets = findViewById(R.id.lv_v_listOfPets);
@@ -55,31 +94,27 @@ public class MainActivity extends AppCompatActivity {
         //lv_j_listOfPets.setAdapter(adapter);
 
         //I need a list to house all pets for the vet clinic
-        listOfPets = new ArrayList<>();
-        Pet pet = new Pet();
-        pet.setName("Tito");
-        pet.setAge(12);
-        pet.setType("Dog");
-
-        listOfPets.add(pet);
-
-        Pet anotherpet = new Pet("Willow", 5, "Dog");
 
 
-        listOfPets.add(anotherpet);
-        //Log.d("Pet Dat:", pet.getName() + " is a " + pet.getType() + " and is " + pet.getAge() + " years old");
+
 
 
 
         //get an instance of PetDisplayUpdate
         intent_j_displayUpdate = new Intent(MainActivity.this, PetDisplayUpdate.class);
+        intent_j_addNewPet = new Intent(MainActivity.this, AddPet.class);
+        btn_j_addPet = findViewById(R.id.btn_v_addPet);
 
 
-        addDummyDataToArrayList();
+
+
+
         displayAllPetData();
 
         fillListView();
         setOnClickListenerForListView();
+
+        addPetButtonClickListener();
     }
 
 
@@ -131,5 +166,32 @@ public class MainActivity extends AppCompatActivity {
     {
         intent_j_displayUpdate.putExtra("PetData", pet);
         startActivity(intent_j_displayUpdate);
+    }
+
+
+    private void addPetButtonClickListener()
+    {
+        btn_j_addPet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                numberTestingLoad = 99;
+                Log.d("Value after Change", numberTestingLoad + "");
+                Log.d("Value after Change", numberTestingLoad + "");
+
+                //if we want to pass the intent data
+                //we need to make a bundle
+                //first param: name of "variable"
+                //second param: the data to pass to this intent
+                intent_j_addNewPet.putExtra("InfoPassed", "Hello from main");
+                startActivity(intent_j_addNewPet);
+            }
+        });
+    }
+
+
+    public void addPet(Pet p)
+    {
+        listOfPets.add(p);
     }
 }
