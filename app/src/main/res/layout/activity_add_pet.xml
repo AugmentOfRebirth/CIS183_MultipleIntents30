@@ -7,73 +7,56 @@
     android:layout_height="match_parent"
     tools:context=".AddPet">
 
-    <EditText
-        android:id="@+id/et_v_addpet_addType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="39dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_v_addpet_addAge" />
-
-    <EditText
-        android:id="@+id/et_v_addpet_addAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/et_v_addpet_addName"
-        app:layout_constraintTop_toBottomOf="@+id/et_v_addpet_addName" />
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="29dp"
         android:text="Type:"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_v_addpet_addType"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/sp_v_add_type"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="43dp"
+        android:layout_marginEnd="22dp"
         android:text="Age:"
         android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/et_v_add_age"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/btn_v_addpet_back"
+        android:id="@+id/btn_v_add_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="195dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="66dp"
         android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_v_add_add"
+        app:layout_constraintEnd_toStartOf="@+id/btn_v_add_add"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="17dp"
         android:layout_marginTop="51dp"
-        android:layout_marginEnd="9dp"
+        android:layout_marginEnd="11dp"
         android:text="Name:"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/et_v_addpet_addName"
+        app:layout_constraintEnd_toStartOf="@+id/et_v_add_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_v_addpet_addName"
+        android:id="@+id/et_v_add_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -82,4 +65,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/sp_v_add_type"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="38dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/btn_v_add_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="200dp"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_v_add_newPetType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginBottom="440dp"
+        android:text="add new type"
+        android:textColor="#1E2FC8"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_v_add_type"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/et_v_add_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_add_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
